@@ -14,7 +14,6 @@ K6 -. Load testing .-> Nginx
 K6 --> InfluxDB --> Grafana
 ```
 
-```
 
 ## 💻 How to use
 
