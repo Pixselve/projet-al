@@ -1,6 +1,3 @@
-*
-!/compose.yaml
-!/nginx.conf
-!/load-testing/**/*
-README.md
-.gitignore
+certs
+db-data
+load-testing/dashboards
