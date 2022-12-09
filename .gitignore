@@ -1,0 +1,6 @@
+*
+!/compose.yaml
+!/nginx.conf
+!/load-testing/**/*
+README.md
+.gitignore
