@@ -54,3 +54,19 @@ The results are available on the grafana dashboard at [http://localhost:3000](ht
 The credentials are `admin` / `admin`.
 
 ![img.png](docs/grafana dashboard.png)
+
+## 📟 Monitoring
+
+The global architecture is monitored with [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/).
+
+Example of NestJS dashboard :
+
+![Grafana nest JS](docs/grafana-dashboard-nestjs.png)
+
+The following services are monitored (each one in a specific dashboard) :
+- Backend NestJS
+- Backend Quarkus
+- RabbitMQ
+
+The monitoring results are available on grafana at [http://localhost:3001](http://localhost:3001).
+

@@ -21,6 +21,7 @@ scrape_configs:
         labels:
           group: 'production'
   - job_name: 'nestjs-backend'
+    metrics_path: '/swagger-stats/metrics'
     static_configs:
       - targets: ['backend:3000']
         labels:
