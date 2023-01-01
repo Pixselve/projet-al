@@ -3,7 +3,7 @@
 
 ```mermaid
 flowchart
-backend --> db[PostgreSQL]
+backend --> db[(PostgreSQL)]
 backend --> RabbitMQ
 RabbitMQ --> microservice[Quarkus Microservice to send emails]
 Nginx -- 80-443:3000 --> backend
@@ -11,7 +11,12 @@ microservice -- Send emails --> SMTP
 
 K6 -. Load testing .-> Nginx
 
-K6 --> InfluxDB --> Grafana
+K6 --> InfluxDB
+Grafana -- Get metrics --> InfluxDB
+Grafana -- Get metrics --> Prometheus
+Prometheus -- Fetch metrics --> RabbitMQ
+Prometheus -- Fetch metrics --> backend
+Prometheus -- Fetch metrics --> microservice
 ```
 
 
