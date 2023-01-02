@@ -11,6 +11,7 @@ services:
       - DB_PASSWORD=postgres
       - DB_DATABASE=postgres
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+      - DEFAULT_USER_PASS=admin
   db:
     image: postgres
     restart: always
