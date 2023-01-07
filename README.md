@@ -47,7 +47,7 @@ The SMTP client will be available on http://localhost:1080.
 The results are available on the grafana dashboard at [http://localhost:3000](http://localhost:3000).
 The credentials are `admin` / `admin`.
 
-![img.png](docs/grafana dashboard.png)
+![img.png](docs/grafana-dashboard-load-testing.png)
 
 ## 📟 Monitoring
 
