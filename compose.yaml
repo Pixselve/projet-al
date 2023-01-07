@@ -69,5 +69,11 @@ services:
       - ./profiling/grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
       - ./profiling/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./profiling/dashboards/:/var/lib/grafana/dashboards
+
+  front:
+    image: ghcr.io/pixselve-school/wm-projet:main
+
 volumes:
     prometheus-data:
+
+
