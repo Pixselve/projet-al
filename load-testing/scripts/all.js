@@ -14,11 +14,17 @@ export const options = {
 export default function (data) {
     group("home", function () {
         let req, res;
-        req = [{
-            "method": "get",
-            "url": baseUrl + "/",
-        }];
         res = http.get(baseUrl + "/");
+        check(res, {
+            "status is 200": (r) => r.status === 200,
+        });
+        sleep(0.02);
+    });
+
+    group("api home", function () {
+        let req, res;
+
+        res = http.get(baseUrl + "/api");
         check(res, {
             "status is 200": (r) => r.status === 200,
         });
@@ -27,11 +33,7 @@ export default function (data) {
 
     group("associations", function () {
         let req, res;
-        req = [{
-            "method": "get",
-            "url": baseUrl + "/",
-        }];
-        res = http.get(baseUrl + "/associations");
+        res = http.get(baseUrl + "/api/associations");
         check(res, {
             "status is 200": (r) => r.status === 200,
         });
@@ -40,11 +42,8 @@ export default function (data) {
 
     group("roles", function () {
         let req, res;
-        req = [{
-            "method": "get",
-            "url": baseUrl + "/",
-        }];
-        res = http.get(baseUrl + "/roles");
+
+        res = http.get(baseUrl + "/api/roles");
         check(res, {
             "status is 200": (r) => r.status === 200,
         });
@@ -53,11 +52,7 @@ export default function (data) {
 
     group("events", function () {
         let req, res;
-        req = [{
-            "method": "get",
-            "url": baseUrl + "/",
-        }];
-        res = http.get(baseUrl + "/events");
+        res = http.get(baseUrl + "/api/events");
         check(res, {
             "status is 200": (r) => r.status === 200,
         });
@@ -66,11 +61,7 @@ export default function (data) {
 
     group("minutes", function () {
         let req, res;
-        req = [{
-            "method": "get",
-            "url": baseUrl + "/",
-        }];
-        res = http.get(baseUrl + "/minutes");
+        res = http.get(baseUrl + "/api/minutes");
         check(res, {
             "status is 200": (r) => r.status === 200,
         });
