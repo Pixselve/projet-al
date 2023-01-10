@@ -1,7 +1,11 @@
 version: "3.9"
 services:
   backend:
-    image: ghcr.io/pixselve-school/tp1-wm:master
+    build:
+      context: ./backend/
+      dockerfile: dev.Dockerfile
+    ports:
+      - "3000:3000"
     depends_on:
       - db
       - rabbitmq
@@ -14,37 +18,16 @@ services:
       - DEFAULT_USER_PASS=admin
       - DEFAULT_USER_EMAIL=admin@administration.fr
       - FRONTEND_URL=http://localhost/
-  db:
-    image: postgres
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: postgres
     volumes:
-      - ./db-data:/var/lib/postgresql/data
-  nginx:
-    image: nginx:latest
-    depends_on:
-      - backend
+      - ./backend/src:/app/src
+  front:
+    build:
+      context: ./frontend/
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./frontend/src:/app/src
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/nginx/certs
-    profiles:
-      - standard
-  nginx-monitoring:
-    image: nginx:latest
-    depends_on:
-      - backend
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx-monito.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/nginx/certs
-    profiles:
-      - monitoring
+      - "4200:4200"
   quarkus:
     image: ghcr.io/pixselve-school/quarkus-wm-project:master
     environment:
@@ -53,12 +36,27 @@ services:
       - RABBITMQ_HOST=rabbitmq
       - RABBITMQ_PORT=5672
       - QUARKUS_MAILER_HOST=smtp
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
   rabbitmq:
     image: rabbitmq:3.11.3-management-alpine
     volumes:
       - "./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
   smtp:
     image: soulteary/maildev
+    ports:
+      - "1080:1080"
   prometheus:
     image: prom/prometheus
     depends_on:
@@ -81,13 +79,12 @@ services:
       - ./profiling/grafana-dashboard.yaml:/etc/grafana/provisioning/dashboards/dashboard.yaml
       - ./profiling/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
       - ./profiling/dashboards/:/var/lib/grafana/dashboards
-      - ./profiling/grafana.ini:/etc/grafana/grafana.ini
+    ports:
+      - "3001:3000"
     profiles:
       - monitoring
-  front:
-    image: ghcr.io/pixselve-school/wm-projet:main
 
 volumes:
-    prometheus-data:
+  prometheus-data:
 
 
