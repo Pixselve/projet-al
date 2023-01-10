@@ -72,6 +72,38 @@ The SMTP client will be available on http://localhost/mail.
 
 (If enabled) The monitoring will be available on http://localhost/monitoring.
 
+## 📝 Configuration :
+
+You can configure the application by editing the environment variables in the docker-compose file.
+
+### Backend config :
+
+| Name                 | Value                                                                        | Example                          | Required |
+|----------------------|------------------------------------------------------------------------------|----------------------------------|----------|
+| `DB_HOST`            | The host of the database. It should be a PostgreSQL database.                | 127.0.0.1                        | ✅        |
+| `DB_USERNAME`        | The username of the database.                                                | postgres                         | ✅        |
+| `DB_PASSWORD`        | The password of the database.                                                | postgres                         | ✅        |
+| `DB_DATABASE`        | The name of the database.                                                    | postgres                         | ✅        |
+| `DEFAULT_USER_EMAIL` | If the database is empty, a default user with this email will be created.    | admin@administration.fr          | ✅        |
+| `DEFAULT_USER_PASS`  | If the database is empty, a default user with this password will be created. | admin                            | ✅        |
+| `RABBITMQ_URL`       | The url pointing to a RabbitMQ instance.                                     | amqp://guest:guest@rabbitmq:5672 | ❌        |
+
+### Quarkus config :
+
+| Name                | Value                                         | Example  | Required |
+|---------------------|-----------------------------------------------|----------|----------|
+| `RABBITMQ_USERNAME` | The username of the RabbitMQ instance.        | guest    | ✅        |
+| `RABBITMQ_PASSWORD` | The password of the RabbitMQ instance.        | guest    | ✅        |
+| `RABBITMQ_HOST`     | The host address of the RabbitMQ instance.    | rabbitmq | ✅        |
+| `RABBITMQ_PORT`     | The port of the RabbitMQ instance.            | 5672     | ✅        |
+| `RABBITMQ_PORT`     | The host address of the SMTP server instance. | smtp     | ✅        |
+
+### Database config :
+
+| Name                | Value                                    | Example  | Required |
+|---------------------|------------------------------------------|----------|----------|
+| `POSTGRES_PASSWORD` | The passowrd of the PostgreSQL instance. | postgres | ✅        |
+
 ## 🚛 Load Testing the backend
 
 ### How to run
