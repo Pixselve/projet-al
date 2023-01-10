@@ -243,6 +243,20 @@ It's worth to mention that :
 * The Quarkus microservice is responsible for consuming messages from AMQP queue and sending emails via SMTP
 * The monitoring and profiling services such as Grafana, InfluxDB, Prometheus and load testing service (K6) are being used to monitor and optimize the performance of the system.
 
+### Services Status :
+
+| Service        | Status                              |
+|----------------|-------------------------------------|
+| NestJS Backend | Implemented, Monitored, Load tested |
+| PostgreSQL     | Implemented                         |
+| RabbitMQ       | Implemented, Monitored              |
+| Nginx          | Implemented                         |
+| Quarkus        | Implemented, Monitored              |
+| Mail server    | Implemented                         |
+| Grafana        | Implemented                         |
+| InfluxDB       | Implemented                         |
+| Prometheus     | Implemented                         |
+| K6             | Implemented                         |
 
 ## 🔒 What you have done to ensure the minimal number of ports are exposed in production, that your services are protected, etc.
 
