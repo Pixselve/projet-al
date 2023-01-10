@@ -280,3 +280,4 @@ This file can be imported into your calendar app, allowing you to add the event 
 
 ## 📋 AL Feedback :
 
+Overall, the computer science project was an interesting and enriching experience. We had the feeling that we were learning something new, compared to other academic subjects. The project was interesting to implement, though some instructions were not clear, and some instructions were asked verbally, leaving us uncertain as to whether we had to follow them or not.
