@@ -12,6 +12,8 @@ services:
       - DB_DATABASE=postgres
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
       - DEFAULT_USER_PASS=admin
+      - DEFAULT_USER_EMAIL=admin@administration.fr
+      - FRONTEND_URL=http://localhost/
   db:
     image: postgres
     restart: always
