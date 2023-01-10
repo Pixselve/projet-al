@@ -149,7 +149,7 @@ The following services are monitored (each one in a specific dashboard) :
 - Backend Quarkus
 - RabbitMQ
 
-The monitoring results are available on grafana at [http://localhost:3001](http://localhost:3001).
+The monitoring results are available (if enabled) on grafana at [http://localhost:3001](http://localhost:3001) or [http://localhost/monitoring](http://localhost/monitoring).
 
 ## 🔗 Individual repositories
 
