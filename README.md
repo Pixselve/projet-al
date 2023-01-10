@@ -10,13 +10,121 @@
 
 ## 💻 How to use
 
-```bash
-docker-compose up
+### 🔧 Development :
+
+For development, the docker containers for front & back will use the files from your development environment, in order to start the configured docker compose file, you need this directory structure :
+```
+📦
+│   📜 README.md
+│   📜 compose-dev.yaml    
+└─── 📂 frontend
+│   │   📂 src
+│   │   📜 package.json
+│   │   📜 dev.Dockerfile
+│   │   ...
+└─── 📂 backend
+│   │   📂 src
+│   │   📜 package.json
+│   │   📜 dev.Dockerfile
+│   │   ...
 ```
 
-The backend will be available on http://localhost/api.
-The frontend will be available on http://localhost.
+Then you can run the docker-compose file :
+
+```bash
+docker-compose -f compose-dev.yaml up
+```
+
+If you also want to enable **monitoring** in development, run the following command instead :
+
+```bash
+docker-compose -f compose-dev.yaml --profile monitoring up
+```
+
+The backend will be available on http://localhost:3000.
+
+The frontend will be available on http://localhost:4200.
+
 The SMTP client will be available on http://localhost:1080.
+
+(If enabled) The monitoring will be available on http://localhost:3001.
+
+### 💼 Production :
+
+You can run the docker-compose file with standard profile with this command:
+
+```bash
+docker-compose -f compose.yaml --profile standard up
+```
+
+If you want to enable **monitoring** in production, run the following command instead :
+
+```bash
+docker-compose -f compose.yaml --profile monitoring up
+```
+
+
+The backend will be available on http://localhost/api.
+
+The frontend will be available on http://localhost.
+
+The SMTP client will be available on http://localhost/mail.
+
+(If enabled) The monitoring will be available on http://localhost/monitoring.
+
+## 🚛 Load Testing the backend
+
+### How to run
+
+1. Start the project
+
+    ```bash
+    docker-compose up
+    ```
+
+2. Start the grafana dashboard and the influxdb database
+
+    ```bash
+    cd load-testing
+    docker-compose up -d grafana influxdb
+    ```
+
+3. Run the load test
+
+    ```bash
+    cd load-testing
+    docker-compose run --rm k6 run /scripts/all.js
+    ```
+
+### Results
+
+The results are available on the grafana dashboard at [http://localhost:3000](http://localhost:3000).
+The credentials are `admin` / `admin`.
+
+![img.png](docs/grafana-dashboard-load-testing.png)
+
+## 📟 Monitoring
+
+The global architecture is monitored with [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/).
+
+Example of NestJS dashboard :
+
+![Grafana nest JS](docs/grafana-dashboard-nestjs.png)
+
+The following services are monitored (each one in a specific dashboard) :
+
+- Backend NestJS
+- Backend Quarkus
+- RabbitMQ
+
+The monitoring results are available on grafana at [http://localhost:3001](http://localhost:3001).
+
+## 🔗 Individual repositories
+
+- [Backend NestJS](https://github.com/pixselve-school/tp1-wm)
+- [Frontend Angular](https://github.com/pixselve-school/wm-projet)
+- [Quarkus Microservice](https://github.com/pixselve-school/quarkus-wm-project)
+
 
 ## 🏠 Architecture
 
@@ -112,57 +220,3 @@ Nginx is configured to forward requests to the appropriate internal service base
 
 The only way to access the services via the outside world is through Nginx, which is the only service exposed to the
 outside world.
-
-
-## 🚛 Load Testing the backend
-
-### How to run
-
-1. Start the project
-
-    ```bash
-    docker-compose up
-    ```
-
-2. Start the grafana dashboard and the influxdb database
-
-    ```bash
-    cd load-testing
-    docker-compose up -d grafana influxdb
-    ```
-
-3. Run the load test
-
-    ```bash
-    cd load-testing
-    docker-compose run --rm k6 run /scripts/all.js
-    ```
-
-### Results
-
-The results are available on the grafana dashboard at [http://localhost:3000](http://localhost:3000).
-The credentials are `admin` / `admin`.
-
-![img.png](docs/grafana-dashboard-load-testing.png)
-
-## 📟 Monitoring
-
-The global architecture is monitored with [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/).
-
-Example of NestJS dashboard :
-
-![Grafana nest JS](docs/grafana-dashboard-nestjs.png)
-
-The following services are monitored (each one in a specific dashboard) :
-
-- Backend NestJS
-- Backend Quarkus
-- RabbitMQ
-
-The monitoring results are available on grafana at [http://localhost:3001](http://localhost:3001).
-
-## 🔗 Individual repositories
-
-- [Backend NestJS](https://github.com/pixselve-school/tp1-wm)
-- [Frontend Angular](https://github.com/pixselve-school/wm-projet)
-- [Quarkus Microservice](https://github.com/pixselve-school/quarkus-wm-project)
