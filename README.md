@@ -212,7 +212,7 @@ It's worth to mention that :
 * The monitoring and profiling services such as Grafana, InfluxDB, Prometheus and load testing service (K6) are being used to monitor and optimize the performance of the system.
 
 
-## What you have done to ensure the minimal number of ports are exposed in production, that your services are protected, etc.
+## 🔒 What you have done to ensure the minimal number of ports are exposed in production, that your services are protected, etc.
 
 The only port exposed to the outside world is the port 80, which is used by Nginx as a reverse proxy and load balancer. 
 
@@ -220,3 +220,17 @@ Nginx is configured to forward requests to the appropriate internal service base
 
 The only way to access the services via the outside world is through Nginx, which is the only service exposed to the
 outside world.
+
+## 🎇 Additional features :
+
+First, we have implemented an email verification process when creating a user account. 
+This ensures that only legitimate users can access the account. 
+When you create a new account, you will receive an email with a verification link. 
+Once you click the link, your email address will be verified, and you will be able to log in to your account.
+
+Second, we have added the ability to create and delete events in the association detail page.
+Additionally, when an event is created, a notification email will be sent with an attached .ics file. 
+This file can be imported into your calendar app, allowing you to add the event to your personal calendar.
+
+## 📋 AL Feedback :
+
